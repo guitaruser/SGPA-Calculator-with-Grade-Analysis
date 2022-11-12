@@ -10,7 +10,7 @@ global username_entry, password_entry,mycursor
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="toor",
+    password="Password_here",
     database="bytecoders"
     )
 
