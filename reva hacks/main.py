@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import *
 from cgpa import sgpa
-import mysql.connector
+import mysql.connector,webbrowser
 
 global sub1_entry,sub2_entry,sub3_entry,sub4_entry,sub5_entry,sub6_entry,sub7_entry,sub8_entry,sub9_entry
 global username_entry, password_entry,mycursor
@@ -10,12 +10,16 @@ global username_entry, password_entry,mycursor
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Password_here",
+    password="toor",
     database="bytecoders"
     )
 
 mycursor = mydb.cursor()
 
+def clear():
+    global screen2
+    for widget in screen2.winfo_children():
+        widget.destroy()
 
 def temp_text(e):
    username_entry.delete(0,"end")
@@ -56,8 +60,17 @@ def check_if_member(username,password):
     else:
         return False
 
+def redirect():
+    webbrowser.open("https://www.instagram.com/load_thecode/")
+
 def allow_entry():
-    pass
+    showinfo("Signed In","Successfully Signed Inside Portal")
+    clear()
+    title_member = tk.Label(screen2,text = "We are working\non this\n\nCheck it out in\nnext update\n\nThank you!",bg="#1F1F1F",fg='#FFFFFF',font=('Copperplate Gothic Light',25))
+    title_member.pack(pady=75)
+    redirect_button = tk.Button(screen2,text="Check Us Out!",bg="#BB86FC",fg='#1F1F1F',command=redirect,borderwidth=0,font=('Copperplate Gothic Bold',20))
+    redirect_button.place(x=50,y=350)
+
 
 
 def login():
@@ -98,7 +111,7 @@ def register():
 
 
 def user_profile():
-    global username_entry, password_entry
+    global screen2,username_entry, password_entry
 
     root.geometry("600x370+100+100")
     screen2 = tk.Toplevel()
